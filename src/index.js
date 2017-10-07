@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import ReduxThunk from 'redux-thunk';
 import PostsIndex from './components/posts_index';
 import Promise from 'redux-promise';
 import reducers from './reducers';
 import PostsNew from './components/posts_new';
 import PostsShow from './components/posts_show';
 
-const createStoreWithMiddleware = applyMiddleware(Promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(applyMiddleware(Promise)(createStore));
 
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>

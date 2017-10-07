@@ -9,10 +9,9 @@ const API_KEY = '?key=MostafaZahran';
 
 export function FetchPosts () {
     const request = Axios.get(`${ROOT}/posts${API_KEY}`);
-    return {
-        type: FETCH_POSTS,
-        payload: request
-    };
+    return((dispatch) => {
+        request.then((data) => dispatch({type: FETCH_POSTS, payload: data}))
+    });
 }
 
 export function CreatePost(values, callback){
